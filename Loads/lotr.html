@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Bilbo", "label": "Bilbo", "shape": "dot", "size": 15}, {"font": {"color": "white"}, "id": "Gollum", "label": "Gollum", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Frodo", "label": "Frodo", "shape": "dot", "size": 19}, {"font": {"color": "white"}, "id": "Gandalf", "label": "Gandalf", "shape": "dot", "size": 15}, {"font": {"color": "white"}, "id": "Galadriel", "label": "Galadriel", "shape": "dot", "size": 7}, {"font": {"color": "white"}, "id": "Sam", "label": "Sam", "shape": "dot", "size": 16}, {"font": {"color": "white"}, "id": "Adelard", "label": "Adelard", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Fredegar", "label": "Fredegar", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Pippin", "label": "Pippin", "shape": "dot", "size": 14}, {"font": {"color": "white"}, "id": "Gildor", "label": "Gildor", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Merry", "label": "Merry", "shape": "dot", "size": 12}, {"font": {"color": "white"}, "id": "Barliman", "label": "Barliman", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "Elrond", "label": "Elrond", "shape": "dot", "size": 14}, {"font": {"color": "white"}, "id": "Elladan", "label": "Elladan", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "Gwaihir", "label": "Gwaihir", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Boromir", "label": "Boromir", "shape": "dot", "size": 14}, {"font": {"color": "white"}, "id": "Aragorn", "label": "Aragorn", "shape": "dot", "size": 14}, {"font": {"color": "white"}, "id": "Legolas", "label": "Legolas", "shape": "dot", "size": 12}, {"font": {"color": "white"}, "id": "Saruman", "label": "Saruman", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Tom", "label": "Tom", "shape": "dot", "size": 6}, {"font": {"color": "white"}, "id": "Goldberry", "label": "Goldberry", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "Arwen", "label": "Arwen", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Gimli", "label": "Gimli", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Celeborn", "label": "Celeborn", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Glorfindel", "label": "Glorfindel", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "Denethor", "label": "Denethor", "shape": "dot", "size": 3}]);
+        edges = new vis.DataSet([{"from": "Bilbo", "label": 1, "to": "Gollum", "value": 118, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Frodo", "value": 338, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Gandalf", "value": 80, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Galadriel", "value": 5, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Sam", "value": 64, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Adelard", "value": 8, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Fredegar", "value": 4, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Pippin", "value": 11, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Gildor", "value": 6, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Merry", "value": 24, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Barliman", "value": 1, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Elrond", "value": 24, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Elladan", "value": 4, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Gwaihir", "value": 5, "weight": 1}, {"from": "Bilbo", "label": 1, "to": "Boromir", "value": 4, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Gandalf", "value": 16, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Frodo", "value": 35, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Elrond", "value": 8, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Aragorn", "value": 20, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Boromir", "value": 8, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Legolas", "value": 9, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Saruman", "value": 2, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Gwaihir", "value": 5, "weight": 1}, {"from": "Gollum", "label": 1, "to": "Elladan", "value": 3, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Gandalf", "value": 197, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Merry", "value": 143, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Sam", "value": 510, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Fredegar", "value": 8, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Pippin", "value": 89, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Gildor", "value": 68, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Tom", "value": 104, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Goldberry", "value": 10, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Elrond", "value": 65, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Aragorn", "value": 112, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Elladan", "value": 5, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Arwen", "value": 1, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Legolas", "value": 44, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Boromir", "value": 122, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Gimli", "value": 22, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Celeborn", "value": 6, "weight": 1}, {"from": "Frodo", "label": 1, "to": "Galadriel", "value": 15, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Merry", "value": 41, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Sam", "value": 53, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Pippin", "value": 4, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Fredegar", "value": 4, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Gildor", "value": 4, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Elrond", "value": 35, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Glorfindel", "value": 17, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Aragorn", "value": 66, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Boromir", "value": 43, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Legolas", "value": 25, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Gimli", "value": 45, "weight": 1}, {"from": "Gandalf", "label": 1, "to": "Celeborn", "value": 7, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Elrond", "value": 5, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Galadriel", "value": 22, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Legolas", "value": 5, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Aragorn", "value": 11, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Gimli", "value": 7, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Boromir", "value": 8, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Merry", "value": 3, "weight": 1}, {"from": "Celeborn", "label": 1, "to": "Sam", "value": 5, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Sam", "value": 16, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Glorfindel", "value": 43, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Gimli", "value": 20, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Legolas", "value": 7, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Boromir", "value": 37, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Denethor", "value": 3, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Aragorn", "value": 27, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Pippin", "value": 20, "weight": 1}, {"from": "Elrond", "label": 1, "to": "Elladan", "value": 6, "weight": 1}, {"from": "Galadriel", "label": 1, "to": "Sam", "value": 6, "weight": 1}, {"from": "Galadriel", "label": 1, "to": "Boromir", "value": 6, "weight": 1}, {"from": "Galadriel", "label": 1, "to": "Legolas", "value": 9, "weight": 1}, {"from": "Galadriel", "label": 1, "to": "Aragorn", "value": 6, "weight": 1}, {"from": "Sam", "label": 1, "to": "Merry", "value": 139, "weight": 1}, {"from": "Sam", "label": 1, "to": "Pippin", "value": 106, "weight": 1}, {"from": "Sam", "label": 1, "to": "Gildor", "value": 15, "weight": 1}, {"from": "Sam", "label": 1, "to": "Tom", "value": 9, "weight": 1}, {"from": "Sam", "label": 1, "to": "Goldberry", "value": 3, "weight": 1}, {"from": "Sam", "label": 1, "to": "Glorfindel", "value": 10, "weight": 1}, {"from": "Sam", "label": 1, "to": "Aragorn", "value": 81, "weight": 1}, {"from": "Sam", "label": 1, "to": "Boromir", "value": 24, "weight": 1}, {"from": "Sam", "label": 1, "to": "Gimli", "value": 24, "weight": 1}, {"from": "Sam", "label": 1, "to": "Legolas", "value": 38, "weight": 1}, {"from": "Merry", "label": 1, "to": "Fredegar", "value": 21, "weight": 1}, {"from": "Merry", "label": 1, "to": "Pippin", "value": 59, "weight": 1}, {"from": "Merry", "label": 1, "to": "Tom", "value": 17, "weight": 1}, {"from": "Merry", "label": 1, "to": "Aragorn", "value": 13, "weight": 1}, {"from": "Merry", "label": 1, "to": "Boromir", "value": 26, "weight": 1}, {"from": "Merry", "label": 1, "to": "Legolas", "value": 36, "weight": 1}, {"from": "Merry", "label": 1, "to": "Gimli", "value": 27, "weight": 1}, {"from": "Fredegar", "label": 1, "to": "Pippin", "value": 4, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Gildor", "value": 4, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Tom", "value": 7, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Barliman", "value": 5, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Gimli", "value": 7, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Aragorn", "value": 9, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Boromir", "value": 10, "weight": 1}, {"from": "Pippin", "label": 1, "to": "Legolas", "value": 9, "weight": 1}, {"from": "Tom", "label": 1, "to": "Goldberry", "value": 67, "weight": 1}, {"from": "Tom", "label": 1, "to": "Barliman", "value": 5, "weight": 1}, {"from": "Barliman", "label": 1, "to": "Aragorn", "value": 1, "weight": 1}, {"from": "Aragorn", "label": 1, "to": "Boromir", "value": 172, "weight": 1}, {"from": "Aragorn", "label": 1, "to": "Denethor", "value": 6, "weight": 1}, {"from": "Aragorn", "label": 1, "to": "Legolas", "value": 56, "weight": 1}, {"from": "Aragorn", "label": 1, "to": "Gimli", "value": 26, "weight": 1}, {"from": "Gimli", "label": 1, "to": "Legolas", "value": 87, "weight": 1}, {"from": "Gimli", "label": 1, "to": "Boromir", "value": 31, "weight": 1}, {"from": "Legolas", "label": 1, "to": "Boromir", "value": 49, "weight": 1}, {"from": "Boromir", "label": 1, "to": "Denethor", "value": 2, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
